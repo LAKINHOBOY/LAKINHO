@@ -61,33 +61,35 @@ public class araaystack<T> {
                 System.out.print(stack[i] + " ");
             }
        }
-       public void merge(araaystack<T> list1,araaystack< T> list2){
-
-        int size=list1.size()+list2.size();
-        if (stack.length < size){
-            stack = Arrays.copyOf(stack, size);
-        }
-        for (int i = 0; i < list1.size(); i++) {
-            boolean duplicate = true;
-            if (!duplicate){
-                this.push(list1.stack[i]);
+       private boolean duplicate(araaystack<T> taraaystack, T item) {
+        for (int i = 0; i < top; i++) {
+            if (stack[i].equals(item)){
+                return true;
             }
-
         }
-           for (int i = 0; i < list2.size(); i++) {
-               boolean duplicate = true;
+        return false;
+       }
+       public void merge(araaystack<T> list1, araaystack< T> list2) {
+           int size = list1.size() + list2.size();
+
+           if (stack.length < size)
+               stack = Arrays.copyOf(stack, size);
+
+           for (int i = 0; i < list1.size(); i++) {
+               if (duplicate(this, list1.stack[i]))
+                   this.push(list1.stack[i]);
 
            }
-
-
-
-           System.out.println(list1+""+list2);
-
-
-
-
-
+           for (int i = 0; i < list2.size(); i++) {
+               if (duplicate(this, list2.stack[i]))
+                   this.push(list2.stack[i]);
+           }
        }
+
+
+
+
+
 
     @Override
     public String toString() {
@@ -121,6 +123,6 @@ public class araaystack<T> {
         list3.merge(list1, list2);
 
 
-
+       System.out.println(list3);
     }
 }
